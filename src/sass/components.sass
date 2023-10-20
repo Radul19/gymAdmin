@@ -1,0 +1,253 @@
+@use 'var' as *
+
+.navbar_ctn
+  position: fixed
+  top: 0px
+  width: 70px
+  // width: 13em
+  height: 100vh
+  border-right: 1px solid $third
+  border-top: 1px solid $third
+  border-bottom: 1px solid $third
+  box-sizing: border-box
+  overflow: hidden
+  transition: width .5s
+  display: flex
+  align-items: center
+  padding: 0px 5px
+  left: 0px
+  background-color: $fourth
+  z-index: 1000
+
+  &:hover
+    width: 13em
+
+.navbar
+  position: relative
+  // background-color: red
+  width: 13em
+  // height: 50%
+  display: flex
+  flex-direction: column
+  // padding-top: 25vh
+  gap: 12px 0px
+
+.navbar_item
+  z-index: 100
+  position: relative
+  width: 100%
+  height: 60px
+  display: flex
+  align-items: center
+  // background-color: $third
+  cursor: pointer
+  border-radius: 6px
+  // border-left: 4px solid #eeeeee00
+  box-sizing: border-box
+  &:hover
+    background: $third
+  p
+    width: 8.5em
+    z-index: 75
+    font-size: 14px
+    color: #eee
+    font-weight: 600
+
+.nb_active
+  p
+    color: $primary
+  path
+    fill: $primary
+
+  rect
+    stroke: $primary
+
+.bg
+  background-color: $third
+  position: absolute
+  width: 60px
+  height: 60px
+  z-index: 50
+  border-radius: 6px
+
+.bg_active
+  width: 100%
+
+.bg_false
+  position: absolute
+
+.icon
+  z-index: 75
+  width: 22px
+  height: 22px
+  margin: 0px 24px 0px 19px
+
+.inputText
+  width: 100%
+  font-size: .9em
+  padding: 1.2em
+  display: flex
+  align-items: center
+  border-radius: 5px
+  border: 0px
+  background-color: $third
+  box-sizing: border-box
+  color-scheme: dark
+
+.btn_primary
+  background-color: $primary
+  width: 100%
+  height: 100%
+  border-radius: 5px
+  align-items: center
+  display: flex
+  &_text
+    width: 100%
+    font-size: 1em !important
+    font-weight: 700
+    text-align: center
+    color: $third
+
+.searchbar
+  display: flex
+  background-color: $third
+  border-radius: 5px
+  height: 48px
+  align-items: center
+  padding: 0px 18px
+  box-sizing: border-box
+  min-width: 300px
+
+  &_input
+    width: 100%
+    margin-left: 14px
+    font-size: .9em
+    background-color: #eeeeee00
+    border: 0px
+    &:focus
+      outline: 0px
+
+  &_icon
+    width: 16px
+    height: 16px
+
+/*TABLE*/
+.table
+  width: 100%
+  border: 1px solid $third
+  border-radius: 12px
+  overflow: hidden
+
+  &_ctn
+    overflow: auto
+    height: 60vh
+
+  &_header
+    height: 50px
+    display: flex
+
+.title
+  &_ctn
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding-left: 24px
+    padding-right: 12px
+    width: 200px
+    border-left: 1px solid $third
+    box-sizing: border-box
+  &_text
+    color: #eee
+    margin-right: 12px
+  &_icon
+    display: flex
+    align-items: center
+    width: 14px
+    height: 14px
+
+.tag
+  display: flex
+  align-items: center
+  height: 100%
+  width: 64px
+  box-sizing: border-box
+  padding-left: 28px
+  &_text
+    font-weight: 600
+    font-size: 16px
+  &_icon
+    color: #eee
+    // width: 20px
+    // height: 20px
+    // background-color: $primary
+    // margin-left: 6px
+
+.row
+  &_ctn
+    height: 48px
+    // margin-left: 32px
+    display: flex
+    align-items: center
+    background-color: $third
+  &_num
+    width: 64px
+    box-sizing: border-box
+    text-align: center
+  &_item
+    width: 200px
+    padding-left: 24px
+    box-sizing: border-box
+  &_status
+    width: 200px
+    padding-left: 48px
+    box-sizing: border-box
+
+.select
+  display: flex
+  flex-direction: column
+  cursor: pointer
+  position: relative
+  .placeholder,.select_value
+    width: 100%
+    height: 100%
+    font-size: .9em
+    display: flex
+    align-items: center
+    color: #eeeeeea1
+  &_value
+    color: #eee !important
+    
+  &_display
+    border-radius: 5px
+    display: flex
+    padding: 1.1em
+    background-color: $third
+    display: flex
+    align-items: center
+  &_options
+    z-index: 1000
+    background-color: $third
+    position: absolute
+    top: 85%
+    padding: .5em 0px 0px 0px
+    width: 100%
+    border-radius: 5px
+    overflow: auto
+    height: 0%
+    max-height: 300px
+    p
+      width: 100%
+      // background-color: $third
+      padding: .8em 1.1em
+      box-sizing: border-box
+      font-size: .9em
+      &:hover
+        background-color: lighten($third,5)
+
+  svg[active="true"]
+    // transform: rotate(0deg)
+    path
+      fill: $primary
+  // svg
+  //   transform: rotate(90deg)

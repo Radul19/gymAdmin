@@ -1,0 +1,47 @@
+@use 'var' as *
+
+.register_ctn
+    width: 100vw
+    height: 100vh
+    padding: 42px 75px 75px 145px
+    box-sizing: border-box
+    display: flex
+    justify-content: center
+
+    .inside
+        display: flex
+        flex-direction: column
+        align-items: center
+        width: 70%
+        max-width: 700px
+        // background-color: #131231
+
+    .title
+        font-weight: 600
+        color: $primary
+        font-size: 2em
+        // margin-bottom: 4em
+        margin-bottom: 2em
+
+    .inputs_ctn
+        width: 100%
+        display: flex
+        justify-content: space-between
+
+    .left,.right
+        display: flex
+        flex-direction: column
+        width: 45%
+        // background-color: #123123
+        gap: 1em
+
+    .label
+        margin-bottom: .8em
+        font-size: 1.2em
+
+    .btn
+        margin-top: 5em
+        height: 3em
+        width: 50%
+        cursor: pointer
+            

@@ -1,0 +1,59 @@
+@use 'var' as *
+
+.pay_ctn
+    width: 100vw
+    height: 100vh
+    padding: 42px 75px 75px 145px
+    box-sizing: border-box
+    display: flex
+    justify-content: center
+
+    .inside
+        display: flex
+        flex-direction: column
+        align-items: center
+        width: 50%
+        max-width: 500px
+        // background-color: #131231
+
+    .long_select,.short_select
+        display: flex
+        flex-direction: column
+        width: 100%
+        // background-color: #5f5a29
+
+    .label
+        margin-bottom: .8em
+        font-size: 1.2em
+
+    .title
+        font-weight: 600
+        color: $primary
+        font-size: 2em
+        margin-bottom: 4em
+
+    .double_inputs
+        width: 100%
+        display: flex
+        margin-top: 2em
+        justify-content: space-between
+        align-items: flex-end
+
+    .amount_input
+        width: 42%
+
+    .short_select
+        width: 42%
+
+    .equal
+        font-size: 1.5em
+        font-weight: 600
+        margin-bottom: .5em
+
+    .btn
+        margin-top: 5em
+        height: 3em
+        width: 60%
+
+.hidden
+    color: #eeeeee00 
