@@ -32,7 +32,7 @@ function PageAdmin() {
 export default PageAdmin;
 
 /** TO DO
- * Estadisticas en dashboard
  *
+ * Estadisticas en dashboard - Mes / año (?)
  * Pagina de Reporte (?)
  */

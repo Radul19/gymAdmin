@@ -47,9 +47,7 @@ const fillData = async (set = () => {}) => {
   set({ actives, news, today, missing });
 };
 
-
 function Dashboard() {
-  
   const { location } = useContext(LocContext);
   const [searchbar, setSearchbar] = useState("");
   const [data, setData] = useState({
@@ -69,7 +67,6 @@ function Dashboard() {
     stat: true,
   };
 
-
   return (
     <PageContainer>
       <div className="dashboard_ctn">
@@ -83,7 +80,7 @@ function Dashboard() {
             <p onClick={() => console.log(electron)}>Registro de asistencia</p>
             <SearchBar {...{ searchbar, setSearchbar }} />
           </div>
-          <Table {...{tableFilters,searchbar}} data={data.today} />
+          <Table {...{ tableFilters, searchbar }} data={data.today} />
         </div>
       </div>
     </PageContainer>
@@ -119,32 +116,53 @@ const TopLeft = ({ data }) => (
   </div>
 );
 /** TOP RIGHT ITEMS */
-const list = [0, 50, 100, 150, 200, 250];
+const list = [0, 5, 10, 15, 20, 25];
 const list2 = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
-const list3 = [110, 183, 235, 248, 158, 124, 79];
+// const list3 = [110, 183, 235, 248, 158, 124, 79];
 
-const calcSize = (num, max) => {
-  let aux = (num * 100) / 250;
+const calcMax = (stats) => {
+  if (stats.length > 0) {
+    let max = Math.max(...stats);
+    let num = 10;
+    let big = max + (num - (max % num));
+
+    let result = [0, 1, 2, 3, 4, 5];
+    result = result.map((n) => n * (big / 5));
+    return result;
+  } else return [];
+};
+
+const calcSize = (num, stats) => {
+  let max = calcMax(stats);
+  let aux = (num * 100) / max[5];
   return `${aux}%`;
 };
 
-const TopRight = () => {
-  // const [data, setData] = useState({
-  //   day:[],
-  //   week:[],
-  //   month:[],
-  //   year:[]
-  // });
-  // const [range, setRange] = useState(1);
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await electron.readUsers();
-  //     const users = JSON.parse(res);
-  //     users.forEach(user => {
+const statsWeekly = async () => {
+  let res = await electron.readUsers();
+  let users = JSON.parse(res);
+  let aux = [0, 0, 0, 0, 0, 0, 0];
+  users.forEach((user) => {
+    user.attemps.forEach((att) => {
+      if (moment(att.time).week() === moment().week()) {
+        let day = moment(att.time).day();
+        aux[day - 1] += 1;
+      }
+    });
+  });
+  // console.log(aux)
+  return aux;
+};
+const TopRight = ({ data }) => {
 
-  //     });
-  //   })();
-  // }, []);
+  const [stats, setStats] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      let res = await statsWeekly();
+      setStats(res);
+    })();
+  }, [data]);
 
   return (
     <div className="top_right">
@@ -166,22 +184,40 @@ const TopRight = () => {
         <div className="stats_info">
           <div className="display_ctn">
             <div className="display_absolute">
-              {list.toReversed().map((item, index) => (
-                <div className="display_absolute_line" key={index}>
-                  <p className="display_absolute_line_text">{item}</p>
-                </div>
-              ))}
+              {calcMax(stats)
+                .toReversed()
+                .map((item, index) => (
+                  <div className="display_absolute_line" key={index}>
+                    <p className="display_absolute_line_text">{item}</p>
+                  </div>
+                ))}
             </div>
             <div className="display_absoluteBars">
-              {list2.map((item, index) => (
-                <div
-                  className="display_absoluteBars_bar"
-                  key={index}
-                  style={{ height: calcSize(list3[index], null) }}
-                >
-                  <p className="display_absoluteBars_bar_text">{item}</p>
-                </div>
-              ))}
+              {list2.map((item, index) => {
+                const [active, setActive] = useState(false);
+                const me = () => {
+                  setActive(true);
+                };
+                const ml = () => {
+                  setActive(false);
+                };
+                return (
+                  <div
+                    onMouseEnter={me}
+                    onMouseLeave={ml}
+                    className="display_absoluteBars_bar"
+                    key={index}
+                    style={{ height: calcSize(stats[index], stats) }}
+                  >
+                    <p className="display_absoluteBars_bar_text">{item}</p>
+                    {active && (
+                      <p className="display_absoluteBars_bar_amount">
+                        {stats[index]}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
