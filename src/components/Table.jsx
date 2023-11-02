@@ -26,15 +26,6 @@ function Table({ data, tableFilters: tf, searchbar }) {
     }
   };
 
-  // const rowFilter = {
-  //   id,
-  //   name,
-  //   card_id,
-  //   time,
-  //   date,
-  //   stat,
-  // };
-
   let orderData = (d) => {
     if (order.name.length > 0) {
       let n = order.status === 3 ? -1 : 1;
@@ -69,8 +60,8 @@ function Table({ data, tableFilters: tf, searchbar }) {
   useEffect(() => {
     if (searchbar.length > 0) {
       let aux = [];
+      let sb = searchbar;
       data.forEach((item) => {
-        let sb = searchbar;
         for (const key in item) {
           let value =
             typeof item[key] === "string"
@@ -113,7 +104,7 @@ const AllTitles = ({ order, so, tf }) => {
   return (
     <div className="table_header">
       {tf.id && <Tag {...{ order, so }} />}
-      {tf.name && <Title so={so} text="Nombre" name="name" order={order} />}
+      {tf.name && <Title text="Nombre" name="name" {...{ order, so }} />}
       {tf.card_id && (
         <Title so={so} text="Cedula" name="card_id" order={order} />
       )}
@@ -122,7 +113,7 @@ const AllTitles = ({ order, so, tf }) => {
       {tf.birth && <Title so={so} text="Edad" name="birth" order={order} />}
 
       {tf.time && (
-        <Title so={so} text="Hora de registro" name="time" order={order} />
+        <Title text="Hora de registro" name="time" {...{ order, so }} />
       )}
       {tf.date && (
         <Title so={so} text="Tipo de registro" name="date" order={order} />
@@ -137,6 +128,14 @@ const AllTitles = ({ order, so, tf }) => {
         <Title so={so} text="Fecha de Ingreso" name="createdAt" order={order} />
       )}
       {tf.stat && <Title so={so} text="Status" name="stat" order={order} />}
+      {/** PAYS */}
+      {tf.amount && (
+        <Title so={so} text="Cantidad" name="amount" order={order} />
+      )}
+      {tf.amount_type && (
+        <Title so={so} text="Moneda" name="amount_type" order={order} />
+      )}
+      {tf.months && <Title so={so} text="Meses" name="months" order={order} />}
     </div>
   );
 };
@@ -186,31 +185,43 @@ const Tag = ({ order, so }) => {
  * time
  *
  */
-const Row = ({ item, ...props }) => {
+const Row = ({ item, ...tf }) => {
   return (
     <div className="row_ctn">
-      {props.id && <p className="row_num">{item.id}</p>}
-      {props.name && <p className="row_item">{item.name}</p>}
-      {props.card_id && <p className="row_item">{item.card_id}</p>}
-      {props.phone && <p className="row_item">{item.phone}</p>}
-      {props.gender && <p className="row_item">{item.gender}</p>}
-      {props.birth && <p className="row_item">{getAge(item.birth)}</p>}
-      {props.time && <p className="row_item">{getTime(props.time)}</p>}
-      {props.date && <p className="row_item">{getTime(props.time, false)}</p>}
-      {props.membership && (
+      {/** USER PROPS */}
+      {item.id && tf.id && <p className="row_num">{item.id}</p>}
+      {item.name && tf.name && <p className="row_item">{item.name}</p>}
+      {item.card_id && tf.card_id && <p className="row_item">{item.card_id}</p>}
+      {item.phone && tf.phone && <p className="row_item">{item.phone}</p>}
+      {item.gender && tf.gender && <p className="row_item">{item.gender}</p>}
+      {item.birth && tf.birth && (
+        <p className="row_item">{getAge(item.birth)}</p>
+      )}
+      {item.time && tf.time && <p className="row_item">{getTime(item.time)}</p>}
+      {item.date && tf.date && (
+        <p className="row_item">{getTime(item.time, false)}</p>
+      )}
+      {item.membership && tf.membership && (
         <p className="row_item">{getUnixTime(item.membership)}</p>
       )}
-      {props.membership_type && (
+      {item.membership_type && tf.membership_type && (
         <p className="row_item">{item.membership_type}</p>
       )}
-      {props.createdAt && (
+      {item.createdAt && tf.createdAt && (
         <p className="row_item">{getUnixTime(item.createdAt)}</p>
       )}
-      {props.stat && (
+      {tf.stat && (
         <div className="row_status">
           {item.status ? <IconCheckBox /> : <IconErrorBox />}
         </div>
       )}
+
+      {/** PAYS PROPS */}
+      {item.amount && tf.amount && <p className="row_item">{item.amount}</p>}
+      {tf.amount_type && (
+        <p className="row_item">{getCurrency(item.amount_type)}</p>
+      )}
+      {tf.months && <p className="row_item">{item.months}</p>}
     </div>
   );
 };
@@ -229,4 +240,9 @@ const getUnixTime = (date) => {
 const getTime = (t, bool = true) => {
   if (bool) return moment(t).format("hh:mma");
   else return moment(t).format("YYYY M D");
+};
+
+const getCurrency = (aux) => {
+  if (aux) return "$";
+  else return "Bs.f";
 };

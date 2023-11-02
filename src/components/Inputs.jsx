@@ -90,7 +90,7 @@ export const ObjSelects = ({
   placeholder = "Filtros",
   handleFilters,
 }) => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const click = () => {
     setActive(!active);
   };
@@ -170,6 +170,16 @@ const translateKeys = (key) => {
       return "Membresia";
     case "createdAt":
       return "Fecha de ingreso";
+    case "time":
+      return "Hora de registro";
+    case "stat":
+      return "Status";
+    case "amount":
+      return "Cantidad";
+    case "amount_type":
+      return "Moneda";
+    case "months":
+      return "Meses";
     default:
       return "";
   }

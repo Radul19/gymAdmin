@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { ObjSelects, SearchBar, Select } from "../components/Inputs.jsx";
 import PageContainer from "../components/PageContainer.jsx";
@@ -17,10 +18,31 @@ const allFilters = [
     membership: true,
     createdAt: true,
   },
-  {},
-  {},
+  { id:true,name: true, card_id: true, time: true, stat: true },
+  {
+    id:true,
+    name:true ,
+    card_id:true,
+    phone:true,
+    amount:true,
+    amount_type:true,
+    months:true ,
+  },
   {},
 ];
+
+const fillAccessData = async () => {
+  let res = await electron.readUsers();
+  let users = JSON.parse(res);
+  let aux = [];
+  users.forEach((user) => {
+    user.attemps.forEach((att) => {
+      let { name, card_id } = user;
+      aux.push({ ...att, name, card_id });
+    });
+  });
+  return JSON.stringify(aux);
+};
 
 function Database() {
   const [inputs, setInputs] = useState({
@@ -37,24 +59,21 @@ function Database() {
 
   const handleFilters = (att, value) => {
     setTableFilters((prev) => ({ ...prev, [att]: value }));
-  }
+  };
   const fillData = async () => {
     let res = "";
     let dbt = inputs.db_type;
-    if (dbt === ("Usuarios" || dbt === "Registro de Acceso"))
-      res = await electron.readUsers();
+    if (dbt === "Usuarios") res = await electron.readUsers();
+    if (dbt === "Registro de Acceso") res = await fillAccessData();
     else if (dbt === "Pagos") res = await electron.readPays();
     else if (dbt === "Reportes") res = await electron.readReports();
     res = JSON.parse(res);
-
-
     setData(res);
   };
 
   useEffect(() => {
-    // console.log(tableFilters.map((item,index)=>'a'))
     let i = dbTypes.indexOf(inputs.db_type);
-    setTableFilters(allFilters[i])
+    setTableFilters(allFilters[i]);
     fillData();
   }, [inputs.db_type]);
 
@@ -70,7 +89,7 @@ function Database() {
             name="db_type"
           />
           <div className="select_search">
-            <ObjSelects options={tableFilters} {...{handleFilters}} />
+            <ObjSelects options={tableFilters} {...{ handleFilters }} />
             <SearchBar {...{ searchbar, setSearchbar }} />
           </div>
         </div>
