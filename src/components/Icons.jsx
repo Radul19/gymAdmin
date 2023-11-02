@@ -308,36 +308,195 @@ export const IconSelect = ({ active }) => {
     </motion.svg>
   );
 };
-export const IconCheckCircle = ({ size = "24", }) => {
+export const IconCheckCircle = ({ size = "24", color = "#81D316" }) => {
+  const icon = {
+    visible: {
+      pathLength: 1,
+      transition: { duration: 1 },
+    },
+    hidden: {
+      pathLength: 0,
+      transition: { duration: 1 },
+    },
+  };
   return (
     <svg
       width={size}
       height={size}
-      clipRule="evenodd"
-      fillRule="evenodd"
-      strokeLinejoin="round"
-      strokeMiterlimit="2"
-      viewBox="0 0 24 24"
+      viewBox="22 22 156 156"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="m11.998 2.005c5.517 0 9.997 4.48 9.997 9.997 0 5.518-4.48 9.998-9.997 9.998-5.518 0-9.998-4.48-9.998-9.998 0-5.517 4.48-9.997 9.998-9.997zm0 1.5c-4.69 0-8.498 3.807-8.498 8.497s3.808 8.498 8.498 8.498 8.497-3.808 8.497-8.498-3.807-8.497-8.497-8.497zm-5.049 8.886 3.851 3.43c.142.128.321.19.499.19.202 0 .405-.081.552-.242l5.953-6.509c.131-.143.196-.323.196-.502 0-.41-.331-.747-.748-.747-.204 0-.405.082-.554.243l-5.453 5.962-3.298-2.938c-.144-.127-.321-.19-.499-.19-.415 0-.748.335-.748.746 0 .205.084.409.249.557z"
-        fillRule="nonzero"
-        fill="#81D316"
+      <motion.path
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={icon}
+        stroke={color}
+        strokeWidth={7}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M 100, 100 m 75, 0 a 75,75 0 1,0 -150,0 a 75,75 0 1,0  150,0"
+        // fill="#eee"
+      />
+      <motion.path
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={icon}
+        stroke={color}
+        strokeWidth={7}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M 65 100 L 100 135 L 138 72 L 100 135 Z"
+        // fill="#eee"
       />
     </svg>
   );
 };
-export const IconStat = ()=>{
-    return(
-<svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="17" y="1" width="4" height="13" rx="1" stroke="#EEEEEE" strokeWidth="2" strokeLinejoin="round"/>
-<rect x="9" y="7" width="4" height="7" rx="1" stroke="#EEEEEE" strokeWidth="2" strokeLinejoin="round"/>
-<rect x="1" y="3" width="4" height="11" rx="1" stroke="#EEEEEE" strokeWidth="2" strokeLinejoin="round"/>
-</svg>
-
-    )
-}
+export const IconCrossCircle = ({ size = "24", color = "#ff0f0f" }) => {
+  const icon = {
+    visible: {
+      pathLength: 1,
+      transition: { duration: 1 },
+    },
+    hidden: {
+      pathLength: 0,
+      transition: { duration: 1 },
+    },
+  };
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="22 22 156 156"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <motion.path
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={icon}
+        stroke={color}
+        strokeWidth={7}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M 100, 100 m 75, 0 a 75,75 0 1,0 -150,0 a 75,75 0 1,0  150,0"
+        // fill="#eee"
+      />
+      <motion.path
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={icon}
+        stroke={color}
+        strokeWidth={7}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M 70 70 L 130 130 Z"
+        // fill="#eee"
+      />
+      <motion.path
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={icon}
+        transition={{ duration: 2 }}
+        stroke={color}
+        strokeWidth={7}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        d="M 70 130 L 130 70 Z"
+        // fill="#eee"
+      />
+    </svg>
+  );
+};
+export const IconStat = () => {
+  return (
+    <svg
+      width="22"
+      height="15"
+      viewBox="0 0 22 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="17"
+        y="1"
+        width="4"
+        height="13"
+        rx="1"
+        stroke="#EEEEEE"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <rect
+        x="9"
+        y="7"
+        width="4"
+        height="7"
+        rx="1"
+        stroke="#EEEEEE"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <rect
+        x="1"
+        y="3"
+        width="4"
+        height="11"
+        rx="1"
+        stroke="#EEEEEE"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+export const IconArrowLeft = () => {
+  return (
+    <svg
+      width="8"
+      height="12"
+      viewBox="0 0 8 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.06667 5.2L6.4 1.2C7.05924 0.705573 8 1.17595 8 2L8 10C8 10.824 7.05924 11.2944 6.4 10.8L1.06667 6.8C0.533334 6.4 0.533333 5.6 1.06667 5.2Z"
+        fill="#CCC9C0"
+      />
+    </svg>
+  );
+};
+export const IconCheckBox = ({ size = 18 }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+     <path fillRule="evenodd" clipRule="evenodd" d="M18 1C18 0.522 17.621 0 17 0H1C0.38 0 0 0.519 0 1V17C0 17.621 0.52 18 1 18H17C17.478 18 18 17.621 18 17V1ZM7.8 12.812L3.949 9.382C3.784 9.234 3.7 9.03 3.7 8.825C3.7 8.414 4.033 8.079 4.448 8.079C4.626 8.079 4.803 8.142 4.947 8.269L8.245 11.207L13.698 5.245C13.847 5.084 14.048 5.002 14.252 5.002C14.669 5.002 15 5.339 15 5.749C15 5.928 14.935 6.108 14.804 6.251L8.851 12.76C8.704 12.921 8.501 13.002 8.299 13.002C8.121 13.002 7.942 12.94 7.8 12.812Z" fill="#81D316"/>
+    </svg>
+  );
+};
+export const IconErrorBox = ({size=18}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+<path fillRule="evenodd" clipRule="evenodd" d="M18 0.998047C18 0.520047 17.621 -0.00195312 17 -0.00195312H1C0.38 -0.00195312 0 0.517047 0 0.998047V16.998C0 17.619 0.52 17.998 1 17.998H17C17.478 17.998 18 17.619 18 16.998V0.998047ZM11.708 5.21205L8.991 7.93005L6.269 5.20805C6.123 5.06205 5.931 4.98905 5.739 4.98905C5.335 4.98905 4.989 5.31305 4.989 5.73805C4.989 5.93105 5.062 6.12205 5.208 6.26905L7.93 8.99105L5.202 11.719C5.055 11.866 4.982 12.058 4.982 12.25C4.982 12.677 5.331 13 5.732 13C5.924 13 6.116 12.927 6.263 12.781L8.991 10.053L11.719 12.781C11.865 12.927 12.058 13 12.25 13C12.651 13 13 12.677 13 12.25C13 12.058 12.927 11.866 12.78 11.719L10.052 8.99105L12.769 6.27405C12.916 6.12705 12.989 5.93605 12.989 5.74305C12.989 5.31805 12.642 4.99305 12.238 4.99305C12.046 4.99305 11.854 5.06605 11.708 5.21205Z" fill="#ff0f0f"/>
+    </svg>
+  );
+};
 /* 
 export const Icon_ = ()=>{
     return(

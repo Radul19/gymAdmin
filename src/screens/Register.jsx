@@ -1,22 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BtnPrimary, InputText } from "../components/Inputs.jsx";
 import PageContainer from "../components/PageContainer.jsx";
 import "../sass/register.sass";
 import { LongSelect } from "./Pay.jsx";
 import { memTypes, User } from "../components/Schemas.js";
-
-
-const insertDots = (text) => {
-  text = text.replaceAll(".", "");
-  let aux = text.split("");
-  for (let i = 0; i < aux.length; i++) {
-    if (i === 1 || i === 5) {
-      aux.splice(i + 1, 0, ".");
-    }
-  }
-  let aux2 = aux.toString();
-  return aux2.replaceAll(",", "");
-};
+import { card_id_dots } from "../components/helpers.js";
+import { LocContext } from "../components/location.jsx";
 
 const phoneLine = (text) => {
   text = text.replaceAll("-", "");
@@ -60,15 +49,30 @@ const exampleValues = {
   membership: "1 Mes",
 };
 
-function Register() {
-  const [inputs, setInputs] = useState(exampleValues);
+function Register({ setMsg }) {
+  
+  const { setLocation } = useContext(LocContext);
+  const [inputs, setInputs] = useState(resetValues);
 
-  const createUser = () => {
-    // console.log(today());
-    // console.log(plusMonths(3));
-    let newUser = new User(inputs);
-    console.log(newUser);
-    newUser.registerUser();
+  const createUser = async () => {
+    try {
+      let newUser = new User(inputs);
+      console.log(newUser);
+      await newUser.registerUser();
+      setMsg({
+        text: "Usuario registro con exito!",
+        status: true,
+        show: true,
+      });
+      setInputs(resetValues)
+      setLocation('/')
+    } catch (error) {
+      setMsg({
+        text: "No se ha podido registrar al usuario",
+        status: false,
+        show: true,
+      });
+    }
   };
 
   const onChange = (e) => {
@@ -77,7 +81,7 @@ function Register() {
     let value = e.target.value;
 
     if (att === "card_id" && !remove) {
-      value = insertDots(value);
+      value = card_id_dots(value);
     }
 
     if (att === "phone" && !remove) {
@@ -166,7 +170,7 @@ function Register() {
             </div>
           </div>
           <div className="btn">
-            <BtnPrimary text="Confirmar" action={createUser} />
+            <BtnPrimary text="Confirmar" onClick={createUser} />
           </div>
         </div>
       </div>

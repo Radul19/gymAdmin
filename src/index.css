@@ -33,17 +33,17 @@ input {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #404040;
+  background: #2f2f2f;
   border-radius: 0px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2f2f2f;
+  background: #191919;
   border-radius: 0px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #717171;
+  background: #ffffff19;
 }

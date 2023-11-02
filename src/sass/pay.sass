@@ -13,14 +13,29 @@
         flex-direction: column
         align-items: center
         width: 50%
-        max-width: 500px
+        max-width: 600px
         // background-color: #131231
 
     .long_select,.short_select
+        position: relative
         display: flex
         flex-direction: column
         width: 100%
         // background-color: #5f5a29
+
+        .labels
+            display: flex
+            justify-content: space-between
+            align-items: flex-end
+
+            .msg_sc
+                margin-bottom: 1em
+                animation: .2s linear fadeIn
+                color: #81D316
+            .msg_err
+                margin-bottom: 1em
+                animation: .2s linear fadeIn
+                color: #ff4646ba
 
     .label
         margin-bottom: .8em
@@ -40,6 +55,9 @@
         align-items: flex-end
 
     .amount_input
+        position: relative
+        display: flex
+        flex-direction: column
         width: 42%
 
     .short_select
@@ -55,5 +73,37 @@
         height: 3em
         width: 60%
 
+    .found
+        position: absolute
+        height: 24px
+        width: 24px
+        // background-color: blue
+        bottom: .9em
+        right: 1em
+
+    // .errorHover
+    // .successHover
+
 .hidden
-    color: #eeeeee00 
+    color: #eeeeee00
+
+.money_sign
+    position: absolute
+    top: 0px
+    right: 0px
+    border-left: 3px solid $fourth
+    border-top-right-radius: 5px 
+    border-bottom-right-radius: 5px 
+    font-size: .9em
+    padding: 1.2em 0px
+    width: 3.5em
+    text-align: center
+    cursor: pointer
+    &:hover
+        color: $primary
+
+@keyframes fadeIn
+    from
+        opacity: 0
+    to
+        opacity: 1

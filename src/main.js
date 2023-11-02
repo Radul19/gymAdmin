@@ -73,6 +73,36 @@ ipcMain.handle('writeUser',async (event,content)=>{
   
 })
 
+
+ipcMain.handle('readReports', async () => {
+  const data = fs.readFileSync('./reports.json', { encoding: "utf8" })
+  return data
+
+});
+
+ipcMain.handle('writeReports',async (event,content)=>{
+  try {
+    fs.writeFileSync('./reports.json',content,cb)
+  } catch (error) {
+    console.log(error.message)
+  }
+  
+})
+ipcMain.handle('readPays', async () => {
+  const data = fs.readFileSync('./pays.json', { encoding: "utf8" })
+  return data
+
+});
+
+ipcMain.handle('writePays',async (event,content)=>{
+  try {
+    fs.writeFileSync('./pays.json',content,cb)
+  } catch (error) {
+    console.log(error.message)
+  }
+  
+})
+
 // fs.writeFile('./test.json',JSON.stringify(content),cb)
 
 /**fs.readFile('./components/user.js', 'utf-8', (err, data) => {
