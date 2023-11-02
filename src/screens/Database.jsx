@@ -61,12 +61,12 @@ function Database() {
     setTableFilters((prev) => ({ ...prev, [att]: value }));
   };
   const fillData = async () => {
-    let res = "";
+    let res = "[]";
     let dbt = inputs.db_type;
     if (dbt === "Usuarios") res = await electron.readUsers();
     if (dbt === "Registro de Acceso") res = await fillAccessData();
     else if (dbt === "Pagos") res = await electron.readPays();
-    else if (dbt === "Reportes") res = await electron.readReports();
+    // else if (dbt === "Reportes") res = await electron.readReports();
     res = JSON.parse(res);
     setData(res);
   };
